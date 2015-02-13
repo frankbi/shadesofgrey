@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <script type="text/javascript">
+
+    $(function() {
+
+        // TODO
+        var short_url = "http://forbes.com";
+        var text = "The 255 Shades of Gray: How many shades are you? Find out: ";
+
+        var width  = 575,
+            height = 400,
+            left   = ($(window).width()  - width)  / 2,
+            top    = ($(window).height() - height) / 2,
+            opts   = 'status=1' +
+                 ',width='  + width  +
+                 ',height=' + height +
+                 ',top='    + top    +
+                 ',left='   + left;
+
+        $("i.fa-twitter").bind('click', function() {
+            window.open("https://www.twitter.com/share?text=" + text + "&url=" + short_url, '_blank', opts);
+        })
+
+        $("i.fa-facebook-official").bind('click', function() {
+            window.open("https://www.facebook.com/sharer/sharer.php?u=" + short_url, '_blank', opts);
+        })
+
+        $("i.fa-external-link").bind('click', function() {
+            window.open("http://forbes.com/", opts);
+        })
+
+        $("i.fa-link").bind('click', function() {
+            window.open("http://bit.ly/1CnPiDx", opts);
+        })
+
+
+        $('button#submit_button').bind('click', function() {
+
+            $("#submit_button").html("LOOKING IT UP ... ");
+
+            data = {
+                handle: $('input[name="twitter_handle"]').val()
+            };
+
+            $.getJSON('/getColors', data,
+                function(data) {
+
+                    var num_grays = data["num_grays"];
+                    var num_colors = data["num_colors"];
+                    var avatar_url = data["avatar_url"];
+
+                    $("#submit_button").html("<div class='results cf'><img class='avatar' src='" + avatar_url + "'><div class='grey_score'><h2>" + (num_grays - 1) + "</h2><h3>SHADES OF GREY</h3></div></div>")
+                    .animate({ height: 200 }, 420);
+
+                    $("#submit_button").addClass("result_background")
+
+                    $("#submit_button").removeClass("button_hover");
+
+                    text = "I'm " + num_grays + " shades of gray. Find out yours: ";
+                }
+            );
+
+            return false;
+
+        });
+
+    });
+
+    </script>
+    <style>
+
+.cf:before, .cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
+
+.cf {
+    *zoom: 1;
+}
+
+@import url(http://fonts.googleapis.com/css?family=PT+Serif:400,700);
+
+@import url(http://fonts.googleapis.com/css?family=Playfair+Display:400,400italic,700italic);
+
+@import url(http://fonts.googleapis.com/css?family=Oswald:400,300);
+
+@import url(http://fonts.googleapis.com/css?family=Abril+Fatface);
+
+body {
+    background-color: black;
+}
+
+h1, h2, h3, h4, h5, h6, p, img {
+    margin: 0;
+    padding: 0;
+}
+
+.app-container {
+    max-width:420px;
+    padding:10px;
+    margin:5% auto 0 auto;
+    border:1px solid black;
+    font-family: 'PT Serif', serif;
+    background-color:black;
+}
+
+.app-container > form {
+    text-align:center;
+    padding:15px;
+}
+
+input#input_field {
+    width:80%;
+    height:30px;
+    margin:0px;
+    padding:0px;
+    font-size:15px;
+    text-transform: uppercase;
+    text-align:center;
+    border: none;
+    font-weight: bold;
+    box-shadow: 1px 2px 3px rgba(255,255,255,1);
+}
+
+button#submit_button {
+    display:block;
+    width:80%;
+    height:40px;
+    margin:20px auto 0 auto;
+    border: 0;
+    color:white;
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-size: 20px;
+    font-style: italic;
+    letter-spacing: 1.25px;
+    background-color:rgb(19,66,92);
+    box-shadow: 1px 2px 3px rgba(19,66,92,0.9);
+}
+
+button#submit_button.button_hover:hover {
+    color:black;
+    background-color: white;
+    box-shadow: 1px 2px 3px rgba(255,255,255,1);
+    cursor: pointer;
+}
+
+div#blurb_container {
+    width:95%;
+
+    margin:0 auto 0 auto;
+}
+
+div#blurb_container > h2, h3 {
+    text-transform: uppercase;
+    font-weight: 400;
+    color:#fff;
+}
+
+div#blurb_container > h2 {
+    font-size: 5.25em;
+    margin-bottom: 30px;
+}
+
+div#blurb_container > h3 {
+    font-size: 3.75em;
+    margin-bottom: -20px;
+}
+
+img.avatar {
+    width:100px;
+    height:100px;
+    border-radius:8px;
+    float:left; display:inline;
+    border:3px white solid;
+}
+
+div.grey_score {
+    width:100px;
+    height:100px;
+    border-radius:8px;
+    border:3px white transparent;
+    float:right;
+    display:inline;
+    background-color: transparent
+}
+
+div.grey_score > h2 {
+    font-size:3.5em;
+}
+
+div.grey_score > h3 {
+    font-size:12px;
+    height:20px;
+}
+
+div.results {
+    max-width:80%;
+    margin:0 auto 0 auto;
+    text-align: center;
+}
+
+div.explainer_container {
+    width:80%;
+    height:35px;
+    margin:0 auto 0 auto;
+    color:white;
+}
+
+div.explainer_container > p {
+    font-family: 'Oswald', sans-serif;
+    font-weight: bold;
+    font-size: 1.05em;
+    letter-spacing: 0.1em;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.result_background {
+    background-color: black !important;
+    box-shadow: 0px 0px 0px black !important;
+}
+
+div.share_icons {
+    width:80%;
+    margin:10px auto 0 auto;
+    text-align: center;
+}
+
+i {
+    color:white;
+    margin:0 15px 0 15px;
+    cursor: pointer;
+}
+
+
+    @media (max-width: 420px) {
+
+        div#blurb_container {
+            width:65%;
+            margin:0 auto 0 auto;
+        }
+
+        div#blurb_container > h2, h3 {
+            text-transform: uppercase;
+            font-family: 'Abril Fatface', cursive;
+        }
+
+        div#blurb_container > h3 {
+            font-size: 50px;
+            line-height: 85%;
+            margin-bottom:0px;
+        }
+
+        div#blurb_container > h3 > span {
+            color:white !important;
+        }
+
+        div#blurb_container > h2 > span {
+            color:white !important;
+        }
+
+        div#blurb_container > h2 {
+            font-size: 50px;
+            line-height: 85%;
+        }
+
+        input#input_field {
+            width:100%;
+        }
+
+        button#submit_button {
+            width:100%;
+        }
+
+        div.explainer_container {
+            width:95%;
+            height:25px;
+        }
+
+        div.explainer_container > p {
+            font-size: 1em;
+        }
+
+        div.share_icons {
+            width:95%;
+            margin:10px auto 0 auto;
+            text-align: center;
+        }
+
+        i {
+            margin:20px 25px 0 25px;
+        }
+
+    }
+
+
+    </style>
+</head>
+<body>
+
+    <div class="app-container cf">
+        <form>
+            <div id="blurb_container" class="cf">
+                <h3>255 <span style="color:rgb(139,139,139);">Shades</span></h3>
+                <h2><span style="color:rgb(139,139,139);">Of</span> Grey</h2>
+            </div>
+            <div class="explainer_container">
+                <p>Enter A Twitter Username:</p>
+            </div>
+            <input type="text" id="input_field" name="twitter_handle" placeholder="@FiftyShades">
+            <button type="submit" class="button_hover" id="submit_button">CURIOUS?</button>
+        </form>
+        <div class="share_icons cf">
+            <i class="fa fa-twitter" title="Share on Twitter"></i>
+            <i class="fa fa-facebook-official" title="Share on Facebook"></i>
+            <i class="fa fa-external-link" title="Read Methodology"></i>
+            <i class="fa fa-link" title="Get Embed Code"></i>
+        </div>
+    </div>  
+
+</body>
+</html>
