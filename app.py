@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html', name = "FoRbEs")
+    return render_template('index.html')
 
 @app.route('/getColors')
 def add_numbers():
@@ -22,5 +22,6 @@ def add_numbers():
     )
 
 if __name__ == '__main__':
-	post = int(os.environ.get("PORT", 5000))
-	app.run(debug=True, host='0.0.0.0', port=port)
+	# post = int(os.environ.get("PORT", 5000))
+	# app.run(debug=True, host='0.0.0.0', port=port)
+	app.run()
