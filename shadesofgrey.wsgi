@@ -5,4 +5,3 @@ logging.basicConfig(stream=sys.stderr)
 sys.path.insert(0,"/var/www/shadesofgrey/")
 
 from shadesofgrey import app as application
-application.secret_key = 'Add your secret key'
