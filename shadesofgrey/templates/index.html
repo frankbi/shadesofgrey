@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <title>101 Shades of Grey | Forbes</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -11,8 +12,8 @@
     $(function() {
 
         // TODO
-        var short_url = "http://forbes.com";
-        var text = "The 255 Shades of Gray: How many shades are you? Find out: ";
+        var short_url = "http://onforb.es/1DCkfrB";
+        var text = "The 101 Shades of Grey: How many shades are you? Find out with this app via @Forbes: ";
 
         var width  = 575,
             height = 400,
@@ -33,7 +34,7 @@
         })
 
         $("i.fa-external-link").bind('click', function() {
-            window.open("http://forbes.com/", opts);
+            window.open("http://onforb.es/1DCkfrB", opts);
         })
 
         $("i.fa-link").bind('click', function() {
@@ -55,14 +56,14 @@
                     var num_colors = data["num_colors"];
                     var avatar_url = data["avatar_url"];
 
-                    $("#submit_button").html("<div class='results cf'><img class='avatar' src='" + avatar_url + "'><div class='grey_score'><h2>" + (num_grays - 1) + "</h2><h3>SHADES OF GREY</h3></div></div>")
+                    $("#submit_button").html("<div class='results cf'><img class='avatar' src='" + avatar_url + "'><div class='grey_score'><h2>" + num_grays + "</h2><h3>SHADES OF GREY</h3></div></div>")
                     .animate({ height: 200 }, 420);
 
                     $("#submit_button").addClass("result_background")
 
                     $("#submit_button").removeClass("button_hover");
 
-                    text = "I'm " + num_grays + " shades of gray. Find out yours: ";
+                    text = "I'm " + num_grays + " shades of grey. Find out yours: ";
 
                 })
                 .fail(function() {
@@ -316,11 +317,11 @@ i {
     <div class="app-container cf">
         <form>
             <div id="blurb_container" class="cf">
-                <h3>255 <span style="color:rgb(139,139,139);">Shades</span></h3>
+                <h3>101 <span style="color:rgb(139,139,139);">Shades</span></h3>
                 <h2><span style="color:rgb(139,139,139);">Of</span> Grey</h2>
             </div>
             <div class="explainer_container">
-                <p>Enter A Twitter Username:</p>
+                <p>Enter Twitter Username:</p>
             </div>
             <input type="text" id="input_field" name="twitter_handle" placeholder="@FiftyShades">
             <button type="submit" class="button_hover" id="submit_button">CURIOUS?</button>

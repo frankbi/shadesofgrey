@@ -6,6 +6,7 @@ from PIL import Image
 import requests
 import urllib
 import cStringIO
+import csv
 
 class ShadesOfGray:
 
@@ -28,9 +29,18 @@ class ShadesOfGray:
 	def count_grays(self, data):
 		grays = []
 
+		x11_grays = []
+
+		f = open("grays.csv")
+		csv_f = csv.reader(f, delimiter = "\t")
+
+		for row in csv_f:
+			x11_grays.append(str(row[0]))
+
 		for color in data:
-			if color[0] == color[1] == color[2]:
-				grays.append(color)
+			color_string = str(color)
+			if color_string in x11_grays:
+				grays.append(color_string)
 
 		return {
 			"all_grays": grays,
