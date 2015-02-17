@@ -17,6 +17,8 @@ class ShadesOfGray:
 
 		soup = BeautifulSoup(r.text)
 
+		page_title = soup.find("title").text
+
 		avatar_url = soup.find("img", attrs = { "class": "ProfileAvatar-image" })["src"]
 
 		all_colors = self.get_colors(avatar_url)
@@ -51,4 +53,3 @@ class ShadesOfGray:
 			colors[color] = colors.get(color, 0) + 1
 
 		return colors
-
