@@ -1,7 +1,8 @@
 #!/usr/bin/python
 
 from bs4 import BeautifulSoup
-from PIL import Image
+# from PIL import Image
+import Image
 import requests
 import urllib
 import cStringIO
