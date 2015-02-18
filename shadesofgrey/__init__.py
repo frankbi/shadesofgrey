@@ -8,7 +8,7 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/getColors')
+@app.route('/findColors')
 def add_numbers():
 
     user = request.args.get("handle", 0, type = str)

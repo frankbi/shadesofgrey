@@ -49,7 +49,7 @@
                 handle: $('input[name="twitter_handle"]').val()
             };
 
-            $.getJSON('/getColors', data,
+            $.getJSON('/findColors', data,
                 function(data) {
 
                     var num_grays = data["num_grays"];
@@ -98,8 +98,6 @@
 @import url(http://fonts.googleapis.com/css?family=Playfair+Display:400,400italic,700italic);
 
 @import url(http://fonts.googleapis.com/css?family=Oswald:400,300);
-
-@import url(http://fonts.googleapis.com/css?family=Abril+Fatface);
 
 body {
     background-color: black;
@@ -258,7 +256,6 @@ i {
 
         div#blurb_container > h2, h3 {
             text-transform: uppercase;
-            font-family: 'Abril Fatface', cursive;
         }
 
         div#blurb_container > h3 {
